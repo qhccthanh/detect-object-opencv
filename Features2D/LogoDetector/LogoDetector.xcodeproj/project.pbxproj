@@ -48,20 +48,13 @@
 		ADF03E221B12812E00115352 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF03E211B12812E00115352 /* opencv2.framework */; };
 		ADF65B541B050A7C00CCB451 /* MSERFeature.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADF65B531B050A7C00CCB451 /* MSERFeature.mm */; };
 		ADFEEAC71B3EC2BF00DAD2A6 /* GeometryUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADFEEAC61B3EC2BF00DAD2A6 /* GeometryUtil.mm */; };
+		F4466CBA1DDFEE3C008E9DFE /* Olong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4466CB91DDFEE3C008E9DFE /* Olong.jpg */; };
+		F4466CBC1DDFF561008E9DFE /* Vi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4466CBB1DDFF561008E9DFE /* Vi.jpg */; };
 		F44F9CF71DD05E1100AD3756 /* object_dep1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F44F9CF41DD05E1100AD3756 /* object_dep1.jpg */; };
 		F44F9CF81DD05E1100AD3756 /* object_dep2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F44F9CF51DD05E1100AD3756 /* object_dep2.jpg */; };
 		F44F9CF91DD05E1100AD3756 /* object_dep3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F44F9CF61DD05E1100AD3756 /* object_dep3.jpg */; };
 		F4DE9F421DDDAD0B0099F5A1 /* SelectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4DE9F411DDDAD0B0099F5A1 /* SelectionViewController.mm */; };
 		F4DE9F591DDDB6480099F5A1 /* IP4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F461DDDB6480099F5A1 /* IP4.jpg */; };
-		F4DE9F5A1DDDB6480099F5A1 /* IP4_100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F471DDDB6480099F5A1 /* IP4_100.jpg */; };
-		F4DE9F5B1DDDB6480099F5A1 /* IP4_150.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F481DDDB6480099F5A1 /* IP4_150.jpg */; };
-		F4DE9F5C1DDDB6480099F5A1 /* IP4_200.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F491DDDB6480099F5A1 /* IP4_200.jpg */; };
-		F4DE9F5D1DDDB6480099F5A1 /* IP4_250.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F4A1DDDB6480099F5A1 /* IP4_250.jpg */; };
-		F4DE9F5F1DDDB6480099F5A1 /* LyZalo_100W.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F4D1DDDB6480099F5A1 /* LyZalo_100W.jpg */; };
-		F4DE9F601DDDB6480099F5A1 /* LyZalo_150W.png in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F4E1DDDB6480099F5A1 /* LyZalo_150W.png */; };
-		F4DE9F611DDDB6480099F5A1 /* LyZalo_200W.png in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F4F1DDDB6480099F5A1 /* LyZalo_200W.png */; };
-		F4DE9F621DDDB6480099F5A1 /* LyZalo_250H.png in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F501DDDB6480099F5A1 /* LyZalo_250H.png */; };
-		F4DE9F631DDDB6480099F5A1 /* LyZalo_250W.png in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F511DDDB6480099F5A1 /* LyZalo_250W.png */; };
 		F4DE9F641DDDB6480099F5A1 /* Quat.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F531DDDB6480099F5A1 /* Quat.jpeg */; };
 		F4DE9F651DDDB6480099F5A1 /* Quat_100W.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F541DDDB6480099F5A1 /* Quat_100W.jpg */; };
 		F4DE9F661DDDB6480099F5A1 /* Quat_150W.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4DE9F551DDDB6480099F5A1 /* Quat_150W.jpg */; };
@@ -129,21 +122,14 @@
 		ADF65B531B050A7C00CCB451 /* MSERFeature.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MSERFeature.mm; sourceTree = "<group>"; };
 		ADFEEAC51B3EC2BF00DAD2A6 /* GeometryUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryUtil.h; sourceTree = "<group>"; };
 		ADFEEAC61B3EC2BF00DAD2A6 /* GeometryUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GeometryUtil.mm; sourceTree = "<group>"; };
+		F4466CB91DDFEE3C008E9DFE /* Olong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Olong.jpg; sourceTree = "<group>"; };
+		F4466CBB1DDFF561008E9DFE /* Vi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Vi.jpg; sourceTree = "<group>"; };
 		F44F9CF41DD05E1100AD3756 /* object_dep1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = object_dep1.jpg; sourceTree = "<group>"; };
 		F44F9CF51DD05E1100AD3756 /* object_dep2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = object_dep2.jpg; sourceTree = "<group>"; };
 		F44F9CF61DD05E1100AD3756 /* object_dep3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = object_dep3.jpg; sourceTree = "<group>"; };
 		F4DE9F401DDDAD0B0099F5A1 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		F4DE9F411DDDAD0B0099F5A1 /* SelectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectionViewController.mm; sourceTree = "<group>"; };
 		F4DE9F461DDDB6480099F5A1 /* IP4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IP4.jpg; sourceTree = "<group>"; };
-		F4DE9F471DDDB6480099F5A1 /* IP4_100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IP4_100.jpg; sourceTree = "<group>"; };
-		F4DE9F481DDDB6480099F5A1 /* IP4_150.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IP4_150.jpg; sourceTree = "<group>"; };
-		F4DE9F491DDDB6480099F5A1 /* IP4_200.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IP4_200.jpg; sourceTree = "<group>"; };
-		F4DE9F4A1DDDB6480099F5A1 /* IP4_250.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IP4_250.jpg; sourceTree = "<group>"; };
-		F4DE9F4D1DDDB6480099F5A1 /* LyZalo_100W.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LyZalo_100W.jpg; sourceTree = "<group>"; };
-		F4DE9F4E1DDDB6480099F5A1 /* LyZalo_150W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LyZalo_150W.png; sourceTree = "<group>"; };
-		F4DE9F4F1DDDB6480099F5A1 /* LyZalo_200W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LyZalo_200W.png; sourceTree = "<group>"; };
-		F4DE9F501DDDB6480099F5A1 /* LyZalo_250H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LyZalo_250H.png; sourceTree = "<group>"; };
-		F4DE9F511DDDB6480099F5A1 /* LyZalo_250W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LyZalo_250W.png; sourceTree = "<group>"; };
 		F4DE9F531DDDB6480099F5A1 /* Quat.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Quat.jpeg; sourceTree = "<group>"; };
 		F4DE9F541DDDB6480099F5A1 /* Quat_100W.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Quat_100W.jpg; sourceTree = "<group>"; };
 		F4DE9F551DDDB6480099F5A1 /* Quat_150W.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Quat_150W.jpg; sourceTree = "<group>"; };
@@ -347,11 +333,8 @@
 		F4DE9F451DDDB6480099F5A1 /* HCN Hori */ = {
 			isa = PBXGroup;
 			children = (
+				F4466CBB1DDFF561008E9DFE /* Vi.jpg */,
 				F4DE9F461DDDB6480099F5A1 /* IP4.jpg */,
-				F4DE9F471DDDB6480099F5A1 /* IP4_100.jpg */,
-				F4DE9F481DDDB6480099F5A1 /* IP4_150.jpg */,
-				F4DE9F491DDDB6480099F5A1 /* IP4_200.jpg */,
-				F4DE9F4A1DDDB6480099F5A1 /* IP4_250.jpg */,
 			);
 			path = "HCN Hori";
 			sourceTree = "<group>";
@@ -359,12 +342,8 @@
 		F4DE9F4B1DDDB6480099F5A1 /* HCN Ver */ = {
 			isa = PBXGroup;
 			children = (
+				F4466CB91DDFEE3C008E9DFE /* Olong.jpg */,
 				F4DE9F6A1DDDB6C00099F5A1 /* LyZalo.jpg */,
-				F4DE9F4D1DDDB6480099F5A1 /* LyZalo_100W.jpg */,
-				F4DE9F4E1DDDB6480099F5A1 /* LyZalo_150W.png */,
-				F4DE9F4F1DDDB6480099F5A1 /* LyZalo_200W.png */,
-				F4DE9F501DDDB6480099F5A1 /* LyZalo_250H.png */,
-				F4DE9F511DDDB6480099F5A1 /* LyZalo_250W.png */,
 			);
 			path = "HCN Ver";
 			sourceTree = "<group>";
@@ -441,35 +420,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				651B41A61DD026D400946B24 /* object_water1.jpg in Resources */,
+				F4466CBC1DDFF561008E9DFE /* Vi.jpg in Resources */,
 				F4DE9F681DDDB6480099F5A1 /* Quat_250H.jpg in Resources */,
 				AD88C5AB1B0343C30027B0A1 /* Main.storyboard in Resources */,
 				F4DE9F6B1DDDB6C00099F5A1 /* LyZalo.jpg in Resources */,
 				65DD0A741DCB6ED400B1F6D3 /* scene2.jpg in Resources */,
 				F4DE9F661DDDB6480099F5A1 /* Quat_150W.jpg in Resources */,
-				F4DE9F621DDDB6480099F5A1 /* LyZalo_250H.png in Resources */,
 				65DD0A781DCB6ED400B1F6D3 /* scene7.jpg in Resources */,
 				651B41A51DD026D400946B24 /* object_water2.jpg in Resources */,
 				F4DE9F641DDDB6480099F5A1 /* Quat.jpeg in Resources */,
 				65DD0A751DCB6ED400B1F6D3 /* scene3.jpg in Resources */,
 				F44F9CF91DD05E1100AD3756 /* object_dep3.jpg in Resources */,
 				651B41A71DD026D400946B24 /* object_water3.jpg in Resources */,
-				F4DE9F5D1DDDB6480099F5A1 /* IP4_250.jpg in Resources */,
 				65DD0A761DCB6ED400B1F6D3 /* scene4.jpg in Resources */,
-				F4DE9F611DDDB6480099F5A1 /* LyZalo_200W.png in Resources */,
 				F4DE9F591DDDB6480099F5A1 /* IP4.jpg in Resources */,
 				F44F9CF81DD05E1100AD3756 /* object_dep2.jpg in Resources */,
 				65DD0A791DCB6ED400B1F6D3 /* scene6.jpg in Resources */,
-				F4DE9F5C1DDDB6480099F5A1 /* IP4_200.jpg in Resources */,
 				AD88C5B01B0343C30027B0A1 /* LaunchScreen.xib in Resources */,
-				F4DE9F601DDDB6480099F5A1 /* LyZalo_150W.png in Resources */,
-				F4DE9F5B1DDDB6480099F5A1 /* IP4_150.jpg in Resources */,
+				F4466CBA1DDFEE3C008E9DFE /* Olong.jpg in Resources */,
 				F4DE9F651DDDB6480099F5A1 /* Quat_100W.jpg in Resources */,
-				F4DE9F5F1DDDB6480099F5A1 /* LyZalo_100W.jpg in Resources */,
-				F4DE9F631DDDB6480099F5A1 /* LyZalo_250W.png in Resources */,
 				F4DE9F671DDDB6480099F5A1 /* Quat_200W.jpg in Resources */,
 				65DD0A731DCB6ED400B1F6D3 /* scene1.jpg in Resources */,
 				65DD0A691DCB468800B1F6D3 /* zalo.jpg in Resources */,
-				F4DE9F5A1DDDB6480099F5A1 /* IP4_100.jpg in Resources */,
 				65DD0A771DCB6ED400B1F6D3 /* scene5.jpg in Resources */,
 				65DD0A7C1DCB7F2E00B1F6D3 /* zalo_small.jpg in Resources */,
 				F44F9CF71DD05E1100AD3756 /* object_dep1.jpg in Resources */,

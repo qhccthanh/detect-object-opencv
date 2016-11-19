@@ -30,7 +30,7 @@ int detectFeature2D(Mat img_object_rgb, Mat img_scene_rgb);
 
 Rect_<int> MatchingMethod(Mat img, Mat templ, int match_method);
 Mat MatchingMethodWithDraw(Mat img, Mat templ, int match_method);
-Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method);
+Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string &output);
 
 Rect_<int> detectFeature2D_TemplateMatch(Mat img_scene_rgb, int& index_template);
 vector<KeyPoint> getKeyPoint(Mat mat);

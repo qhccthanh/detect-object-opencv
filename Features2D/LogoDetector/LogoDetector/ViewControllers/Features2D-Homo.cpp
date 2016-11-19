@@ -234,7 +234,7 @@ Mat MatchingMethodWithDraw(Mat img, Mat templ, int match_method) {
     return imgResult;
 }
 
-Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method) {
+Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string &output) {
    // printf("\n.................................\n");
     Mat gray;
     cvtColor(img, gray, CV_BGR2GRAY);
@@ -308,7 +308,10 @@ Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method) {
     
 //    printf("\n----------\nmaxValGen: %.2f, minValGen: %.2f - maxLocGen: (%d,%d) - minLocGen: (%d,%d) - ratio: %.4f -------\n", maxValGen,minValGen,maxLocGen.x,maxLocGen.y,minLocGen.x,minLocGen.y,ratio);
     
-    printf("\n(%d,%d)\t%.4f\t%.2f\t%.2f\t(%d,%d)\t(%d,%d)",tW,tH,ratio,minValGen,maxValGen,minLocGen.x,minLocGen.y,maxLocGen.x,maxLocGen.y);
+    output = format("\n(%d,%d)\t%.4f\t%.2f\t%.2f\t(%d,%d)\t(%d,%d)",tW,tH,ratio,minValGen,maxValGen,minLocGen.x,minLocGen.y,maxLocGen.x,maxLocGen.y);
+    
+    printf("%s",output.c_str());
+    
     
     //# unpack the bookkeeping varaible and compute the (x, y) coordinates
     //# of the bounding box based on the resized ratio

@@ -27,14 +27,14 @@
     // Add array UIImage for section HCN Vertical
     [_templateTypeArray addObject: @[
                                      [UIImage imageNamed:@"LyZalo.jpg"],
-                                    
+                                     [UIImage imageNamed:@"Olong.jpg"],
                                      ]
      ];
     
     // Add array UIImage for section HCN Horizontal
     [_templateTypeArray addObject: @[
                                      [UIImage imageNamed:@"IP4.jpg"],
-                                    
+                                     [UIImage imageNamed:@"Vi.jpg"],
                                      ]
      ];
     

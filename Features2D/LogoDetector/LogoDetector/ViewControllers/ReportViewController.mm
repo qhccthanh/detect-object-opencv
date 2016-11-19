@@ -26,6 +26,7 @@
 @property cv::Mat           currentSceneImageMat;
 @property dispatch_queue_t  imageProcessQueue;
 @property map<string,Mat>   cacheMatMap;
+@property NSMutableDictionary *outputDictionary;
 
 @end
 
@@ -38,7 +39,7 @@
     
     NSArray *widthScaleArray = @[@(100),@(150),@(200),@(250),@(300),@(350),@(450),@(500),@(550),@(600)];
     _templateScalesArray = [[NSMutableArray alloc] init];
-    
+    _outputDictionary = [NSMutableDictionary new];
     
     for (NSNumber *width in widthScaleArray) {
         
@@ -132,6 +133,10 @@
             
                 imageView.image = [ImageUtils UIImageFromCVMat:_cacheMatMap[key]];
             }
+            
+            if (infomationLabel) {
+                infomationLabel.text = [_outputDictionary valueForKey:[NSString stringWithUTF8String:key.c_str()]];
+            }
         } else {
             
             __block NSInteger row = indexPath.row;
@@ -140,13 +145,20 @@
             dispatch_async(_imageProcessQueue, ^{
                 
                 if (row == indexPath.row) {
+                    string temp = "";
+                    Mat resultMat = MatchingTemplateWithMultiScale(_currentSceneImageMat, templateImageMat, 0, temp );
                     
-                    Mat resultMat = MatchingTemplateWithMultiScale(_currentSceneImageMat, templateImageMat, 0);
                     _cacheMatMap.insert(pair<string, Mat>(keyTemp,resultMat));
+                    [_outputDictionary setObject:[NSString stringWithUTF8String:temp.c_str()] forKey:[NSString stringWithUTF8String:keyTemp.c_str()]];
+                    
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         if (imageView) {
                             imageView.image = [ImageUtils UIImageFromCVMat:resultMat];
+                        }
+                        
+                        if (infomationLabel) {
+                            infomationLabel.text = [NSString stringWithUTF8String:keyTemp.c_str()];
                         }
                     });
                 }
