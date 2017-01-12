@@ -37,7 +37,7 @@
     // Do any additional setup after loading the view.
     self.templateImageView.image = self.templateSelected;
     
-    NSArray *widthScaleArray = @[@(100),@(150),@(200),@(250),@(300),@(350),@(450),@(500),@(550),@(600)];
+    NSArray *widthScaleArray = @[@(150),@(200),@(250),@(300),@(350),@(450)];
     _templateScalesArray = [[NSMutableArray alloc] init];
     _outputDictionary = [NSMutableDictionary new];
     
@@ -50,7 +50,7 @@
     // Add base image
     //[_templateScalesArray addObject:self.templateSelected];
     
-    _imageProcessQueue = dispatch_queue_create("Processing Image", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+    _imageProcessQueue = dispatch_queue_create("Processing Image", 0);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -146,7 +146,14 @@
                 
                 if (row == indexPath.row) {
                     string temp = "";
+                    double currentTimer = [[NSDate alloc] init].timeIntervalSince1970;
+                    
                     Mat resultMat = MatchingTemplateWithMultiScale(_currentSceneImageMat, templateImageMat, 0, temp );
+                    
+                   // dispatch_async(dispatch_get_main_queue(), ^{
+//                        NSLog(@"Time: %f",);
+                    //});
+                    printf("\nTime: %f",[[NSDate alloc] init].timeIntervalSince1970 - currentTimer);
                     
                     _cacheMatMap.insert(pair<string, Mat>(keyTemp,resultMat));
                     [_outputDictionary setObject:[NSString stringWithUTF8String:temp.c_str()] forKey:[NSString stringWithUTF8String:keyTemp.c_str()]];
@@ -158,7 +165,7 @@
                         }
                         
                         if (infomationLabel) {
-                            infomationLabel.text = [NSString stringWithUTF8String:keyTemp.c_str()];
+                            infomationLabel.text = [NSString stringWithUTF8String:temp.c_str()];
                         }
                     });
                 }

@@ -9,6 +9,7 @@
 #import "SelectionViewController.h"
 #import "ImageUtils.h"
 #import "ReportViewController.h"
+#import "CameraViewController.h"
 
 @interface SelectionViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -69,6 +70,16 @@
     if (indexPath.row == _selectionArray.count - 1) {
         [self dismissViewControllerAnimated:true completion:nil];
         return NULL;
+    }
+    
+    if (indexPath.row == 0) {
+        CameraViewController *cameraVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeViewController"];
+        
+        if(cameraVC) {
+            cameraVC.templateImage = self.templateSelected;
+            [self presentViewController:cameraVC animated:true completion:nil];
+        }
+            
     }
     
     ReportViewController *reportVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ReportViewController"];

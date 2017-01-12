@@ -235,10 +235,21 @@ Mat MatchingMethodWithDraw(Mat img, Mat templ, int match_method) {
 }
 
 Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string &output) {
-   // printf("\n.................................\n");
-    Mat gray;
+    return MatchingTemplateWithMultiScale(img,templ,match_method,output, false);
+}
+
+Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string &output, bool useFeature2D) {
+       // printf("\n.................................\n");
+    Mat gray,temp;
+    Mat tempT;
+    
+    img.copyTo(temp);
+    templ.copyTo(tempT);
+    
     cvtColor(img, gray, CV_BGR2GRAY);
     cvtColor(templ, templ, CV_BGR2GRAY);
+    
+    cvtColor(tempT, tempT, CV_BGR2GRAY);
     
     Canny(templ, templ, 50, 200);
     
@@ -246,9 +257,12 @@ Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string 
     
     double maxValGen = 0;
     double minValGen = INT_MAX;
+    int min_good_match = 0;
+    int max_good_match = 0;
     
     Point maxLocGen,minLocGen;
     
+    bool flag = false;
     
     double ratio = 1;
     
@@ -256,7 +270,7 @@ Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string 
     int tW = templ.cols;
    // printf("-----------\nSize template (%d,%d)",tW,tH);
     // scale 30% -> 100%  step 5%
-    for (int i = 30; i <= 100; i += 5) {
+    for (int i = 40; i <= 90; i += 5) {
         
         //# resize the image according to the scale, and keep track
         //# of the ratio of the resizing
@@ -267,6 +281,26 @@ Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string 
         
 //        pyrDown(gray, scale_image, Size(width_scale,height_scale));
         resize(gray, scale_image, Size(width_scale,height_scale));
+        
+        if ( useFeature2D && (i == 40 || i == 90) ) {
+            int number_good_match = DetectNumberGoodMatchFLANNMatcher(scale_image,tempT);
+            
+            if (i == 40) {
+                min_good_match = max_good_match = number_good_match;
+            } else {
+                if (number_good_match > max_good_match) {
+                    max_good_match = number_good_match;
+                } else {
+                    min_good_match = number_good_match;
+                }
+            }
+            
+            if (min_good_match == 0 || max_good_match == 0) {
+                break;
+            }
+        }
+        
+        
         float r = 100/(i * 1.0);
         
       //  printf("\n**********\nScale: (%d,%d) ratio: %f",width_scale,height_scale,r);
@@ -281,11 +315,17 @@ Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string 
         // matching to find the template in the image
         Mat edge_mat, result;
         
-        Canny(scale_image, edge_mat, 50, 200);
+        Canny(scale_image, edge_mat, 50, 400);
         matchTemplate(edge_mat, templ, result, TM_CCOEFF);
         
         double minVal; double maxVal; Point minLoc; Point maxLoc;
         minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc);
+        
+        if (minVal == INT_MAX || maxVal == 0 ) {
+            printf("\nBreak because minVal: %f, maxVal: %f, minVal + maxVal: %f", minVal,maxVal,minVal + maxVal);
+            flag = true;
+            break;
+        }
         
       //  printf("\nMinVal: %.2f - MaxVal: %.2f\nminLoc: (%d,%d) - maxLoc: (%d,%d)", minVal,maxVal,minLoc.x,minLoc.y,maxLoc.x,maxLoc.y);
         
@@ -308,28 +348,127 @@ Mat MatchingTemplateWithMultiScale(Mat img, Mat templ, int match_method, string 
     
 //    printf("\n----------\nmaxValGen: %.2f, minValGen: %.2f - maxLocGen: (%d,%d) - minLocGen: (%d,%d) - ratio: %.4f -------\n", maxValGen,minValGen,maxLocGen.x,maxLocGen.y,minLocGen.x,minLocGen.y,ratio);
     
-    output = format("\n(%d,%d)\t%.4f\t%.2f\t%.2f\t(%d,%d)\t(%d,%d)",tW,tH,ratio,minValGen,maxValGen,minLocGen.x,minLocGen.y,maxLocGen.x,maxLocGen.y);
+    printf("\nminGoodMatch: %d - maxGoodMatch: %d\n",min_good_match,max_good_match);
     
-    printf("%s",output.c_str());
+    if (minValGen == INT_MAX || maxValGen == 0 || (minValGen + maxValGen < 2000000 && useFeature2D)) {
+        printf("\nBreak because minVal: %f, maxVal: %f, minVal + maxVal: %f", minValGen,maxValGen,minValGen + maxValGen);
+         flag = true;
+    }
     
-    
-    //# unpack the bookkeeping varaible and compute the (x, y) coordinates
-    //# of the bounding box based on the resized ratio
-    int oX = int(maxLocGen.x * ratio);
-    int oY = int(maxLocGen.y * ratio);
-    int oW = int((maxLocGen.x + tW) * ratio);
-    int oH = int((maxLocGen.y + tH) * ratio);
-    
-    Mat temp;
-    img.copyTo(temp);
-    
-    rectangle(temp, Point(oX,oY), Point(oW,oH), Scalar::all(0), 2, 8, 0 );
+    if (!flag) {
+        output = format("\n(%d,%d)\t%.4f\t%.2f\t%.2f\t(%d,%d)\t(%d,%d)",tW,tH,ratio,minValGen,maxValGen,minLocGen.x,minLocGen.y,maxLocGen.x,maxLocGen.y);
+        
+        printf("%s",output.c_str());
+        
+        
+        
+        //# unpack the bookkeeping varaible and compute the (x, y) coordinates
+        //# of the bounding box based on the resized ratio
+        int oX = int(maxLocGen.x * ratio);
+        int oY = int(maxLocGen.y * ratio);
+        int oW = int((maxLocGen.x + tW) * ratio);
+        int oH = int((maxLocGen.y + tH) * ratio);
+        
+        rectangle(temp, Point(oX,oY), Point(oW,oH), Scalar(255,0,0) , 6, 8, 0 );
+    }
     
    // printf("\n.................................\n");
     
     return temp;
 }
 
+
+int DetectNumberGoodMatchFLANNMatcher(Mat scene,Mat object) {
+    
+    SURF surf = SURF();
+    Mat img_object, img_scene, img_matches;
+    
+//    cvtColor(scene, img_scene, CV_BGR2GRAY);
+//    cvtColor(object, img_object, CV_BGR2GRAY);
+    
+    scene.copyTo(img_scene);
+    object.copyTo(img_object);
+    
+    vector<KeyPoint> object_keypoints, scene_keypoints;
+    
+    //1: find the keypoints and descriptors with SURF
+    surf.detect(img_object, object_keypoints);
+    surf.detect(img_scene, scene_keypoints);
+    
+    SurfDescriptorExtractor extractor;
+    Mat descriptors_object,descriptors_scene;
+    
+    extractor.compute(object, object_keypoints, descriptors_object);
+    extractor.compute(scene, scene_keypoints, descriptors_scene);
+    
+    //2: FLANN parameters
+    Ptr<flann::SearchParams> searchParam = new flann::SearchParams(50);
+//    Ptr<flann::IndexParams> indexParam = new flann::IndexParams();
+//    indexParam->setInt("algorithm", 0);
+//    indexParam->setInt("trees", 5);
+//    indexParam->setInt("multi_probe_level", 0);
+    
+    
+    FlannBasedMatcher flann = FlannBasedMatcher(new flann::KDTreeIndexParams(5),searchParam);
+    vector<vector<DMatch>> matches;
+    vector<DMatch> good_matches;
+    
+    flann.knnMatch(descriptors_scene, descriptors_object, matches, 2);
+    
+    for (int i =0 ; i < matches.size(); i++) {
+        vector<DMatch> match = matches[i];
+        
+        if (match.size() == 2 && match[0].distance < 0.70 * match[1].distance) {
+            good_matches.push_back(match[0]);
+        }
+    }
+    printf("\nGood match count: %lu - object keypoint: %lu, scene keypoint: %lu\n",good_matches.size(),object_keypoints.size(),scene_keypoints.size());
+    
+//    if (good_matches.size() >= 25 && good_matches.size() <= 90) {
+    return (int)good_matches.size();
+    /*
+    //-- Localize the object
+    std::vector<Point2f> objPoint;
+    std::vector<Point2f> scenePoint;
+    
+    
+    for( int i = 0; i < good_matches.size(); i++ )
+    {
+        //-- Get the keypoints from the good matches
+        Point2f scene_float = scene_keypoints[ good_matches[i].queryIdx ].pt;
+        Point2f object_float = object_keypoints[ good_matches[i].trainIdx ].pt;
+        scenePoint.push_back( scene_float );
+        objPoint.push_back(object_float);
+    }
+    
+    
+    drawMatches( img_scene, scene_keypoints, img_object, object_keypoints,
+                good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),
+                vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+    
+    Mat H = findHomography(scenePoint, objPoint, RANSAC,5.0);
+    
+    //-- Get the corners from the image_1 ( the object to be "detected" )
+    std::vector<Point2f> obj_corners(4);
+    obj_corners[0] = cvPoint(0,0);
+    obj_corners[1] = cvPoint( img_object.cols, 0 );
+    obj_corners[2] = cvPoint( img_object.cols, img_object.rows );
+    obj_corners[3] = cvPoint( 0, img_object.rows );
+    std::vector<Point2f> scene_corners(4);
+    
+    perspectiveTransform( obj_corners, scene_corners, H);
+    
+    //-- Draw lines between the corners (the mapped object in the scene - image_2 )
+    line( img_matches, scene_corners[0] + Point2f( img_object.cols, 0), scene_corners[1] + Point2f( img_object.cols, 0), Scalar(0, 255, 0), 4 );
+    line( img_matches, scene_corners[1] + Point2f( img_object.cols, 0), scene_corners[2] + Point2f( img_object.cols, 0), Scalar( 0, 255, 0), 4 );
+    line( img_matches, scene_corners[2] + Point2f( img_object.cols, 0), scene_corners[3] + Point2f( img_object.cols, 0), Scalar( 0, 255, 0), 4 );
+    line( img_matches, scene_corners[3] + Point2f( img_object.cols, 0), scene_corners[0] + Point2f( img_object.cols, 0), Scalar( 0, 255, 0), 4 );
+    
+     }
+
+     return false
+     */
+}
 
 
 

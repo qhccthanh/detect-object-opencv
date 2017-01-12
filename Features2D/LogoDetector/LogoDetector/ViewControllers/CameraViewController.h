@@ -20,8 +20,9 @@ typedef void (^TakeAPhotoCompletionBlock)(UIImage *image);
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
 @property (strong,nonatomic) TakeAPhotoCompletionBlock photoHandler;
-
+@property (strong, nonatomic) UIImage *templateImage;
 
 @end

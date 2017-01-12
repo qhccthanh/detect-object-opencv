@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#define CACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, true).firstObject
+
 @interface PickTemplateViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UICollectionView *templateCollectionView;
 
 @end
